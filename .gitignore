@@ -1,0 +1,12 @@
+# audio files and uploads
+uploads/
+*.mp3
+*.wav
+
+# python
+__pycache__/
+*.pyc
+.env
+
+# conda/env artifacts
+*.egg-info/
