@@ -4,7 +4,16 @@ import torch
 import soundfile as sf
 import torchaudio.functional as AF
 
-CONTEXT_PADDING = 0.75
+import os
+import logging
+from dotenv import load_dotenv
+
+load_dotenv()
+
+logger = logging.getLogger(__name__)
+
+CONTEXT_PADDING = float(os.environ.get("CONTEXT_PADDING", "0.75"))
+
 
 _diarization_pipeline = None
 _whisper_model = None
@@ -27,6 +36,7 @@ def get_whisper_model():
     return _whisper_model
 
 
+logger.info(f"Running pipeline with CONTEXT_PADDING={CONTEXT_PADDING}")
 # This function runs the audio processing pipeline, which includes speaker diarization and speech-to-text transcription using Whisper.
 def run_pipeline(audio_path: str):
     # Initialize the diarization pipeline and Whisper model
